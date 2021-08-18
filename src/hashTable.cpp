@@ -73,7 +73,23 @@ void HashTable::removeItem(int key) {
     }
     return;
 }
-
+string HashTable::searchTable(int key){
+    int hashValue = hashFunction(key);
+    auto& cell = table[hashValue];
+    auto bIter = begin(cell);
+    bool keyExists = false;
+    for(; bIter != end(cell); bIter++){
+        if(bIter->first == key){
+            keyExists = true;
+            return bIter->second;
+            break;
+        }
+    }
+    if(!keyExists){
+        cout<<"Key not found."<< "/n";
+    }
+    return "";
+}
 void HashTable::printTable() {
     for(int i ; i<hashGroups; i++){
         if(table[i].size() == 0) continue;
